@@ -1,0 +1,23 @@
+<h2>Kullanıcı Listesi</h2>
+
+<input [(ngModel)]="searchTerm" placeholder="Kullanıcı Ara" />
+<input [(ngModel)]="selectedEmailFilter" placeholder="E-posta Ara" />
+<select [(ngModel)]="itemsPerPage">
+  <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+</select>
+
+<div *ngIf="isLoading">Yükleniyor...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<ul>
+  <li *ngFor="let user of paginatedItems">{{ user.name }} - {{ user.email }}</li>
+</ul>
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Önceki</button>
+  
+  <span>Sayfa {{ currentPage }} / {{ totalPages }}</span>
+  
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Sonraki</button>
+</div>
+
